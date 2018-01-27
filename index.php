@@ -5,7 +5,7 @@ include("/var/www/html/simone/config.php");
 if (is_numeric($_GET["quit"]))
 {
 	// Authentification muss noch anders gelöst werden....
-	if($_GET["pw"] == "abc")
+	if($_GET["pw"] == "123")
 	{
 		$quitid= $_GET["quit"];
 		$ergebnis = mysqli_query($db, "SELECT * FROM fail WHERE workid = '$quitid'");
