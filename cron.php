@@ -60,7 +60,6 @@ while($row = mysqli_fetch_object($ergebnis))
 	       		$xml = new SimpleXMLElement($handle);
 			if ($xml[0] != "green")
 			{
-        			$hash = md5($handle);
 				set_err($xml->msg, $xml->prio, $xml->device, $row->id);
 			}
 		}

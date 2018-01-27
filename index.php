@@ -1,10 +1,10 @@
 <?php
-error_reporting(E_ALL);
-ini_set ('display_errors', 'On');
+echo '<meta http-equiv="refresh" content="30; URL=index.php">';
+//error_reporting(E_ALL);
+//ini_set ('display_errors', 'On');
 include("/var/www/html/simone/config.php");
 if (is_numeric($_GET["quit"]))
 {
-	echo $_COOKIE["login"];
 	$cookie = $_COOKIE["login"];
 	$ergebnis = mysqli_query($db, "SELECT * FROM login WHERE loginstring = '$cookie'");
 	while($row = mysqli_fetch_object($ergebnis))
