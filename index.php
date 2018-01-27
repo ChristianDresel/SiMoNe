@@ -4,15 +4,21 @@ ini_set ('display_errors', 'On');
 include("/var/www/html/simone/config.php");
 if (is_numeric($_GET["quit"]))
 {
-	// Authentification muss noch anders gelöst werden....
-	if($_GET["pw"] == "123")
+	echo $_COOKIE["login"];
+	$cookie = $_COOKIE["login"];
+	$ergebnis = mysqli_query($db, "SELECT * FROM login WHERE loginstring = '$cookie'");
+	while($row = mysqli_fetch_object($ergebnis))
+	{
+		$login=1;
+	}
+	if($login == 1)
 	{
 		$quitid= $_GET["quit"];
 		$ergebnis = mysqli_query($db, "SELECT * FROM fail WHERE workid = '$quitid'");
 		while($row = mysqli_fetch_object($ergebnis))
 		{
 			$timeakt = time();
-			$eintrag = "INSERT INTO logbook (msg, prio, device, timelast, timequit, workid) VALUES ('$row->msg', '$row->prio', '$row->device', '$row->time', '$timeakt', '$row->workid')";
+			$eintrag = "INSERT INTO logbook (msg, prio, device, timelast, timequit, workid) VALUES ('$row->msg', '$row->prio', '$row->device', '$row->timefirst', '$timeakt', '$row->workid')";
 			$eintragen = mysqli_query($db, $eintrag);	
 			$loeschen = "DELETE FROM fail WHERE workid = '$quitid'";
 			$loesch = mysqli_query($db, $loeschen);
@@ -33,7 +39,8 @@ if (is_numeric($_GET["quit"]))
 		<td>msg</td>
 		<td>prio</td>
 		<td>device</td>
-		<td>time</td>
+		<td>erstes auftreten</td>
+		<td>zuletzt aufgetreten</td>
 		<td>workid</td>
 		<td>quittieren</td>
 	</tr>
@@ -55,11 +62,20 @@ while($row = mysqli_fetch_object($ergebnis))
                 $bgcolor="ff0000";
         }
 	$datum = date("d.m.Y H:i",$row->time);
-	echo '<tr bgcolor="'.$bgcolor.'"><td>'.$row->ID.'</td><td>'.$row->msg.'</td><td>'.$row->prio.'</td><td>'.$row->device.'</td><td>'.$datum.'</td><td>'.$row->workid.'</td><td><a href="index.php?quit='.$row->workid.'">quittieren</a></td></tr>';
+	$datumfirst = date("d.m.Y H:i",$row->timefirst);
+	echo '<tr bgcolor="'.$bgcolor.'"><td>'.$row->ID.'</td><td>'.$row->msg.'</td><td>'.$row->prio.'</td><td>'.$row->device.'</td><td>'.$datumfirst.'</td><td>'.$datum.'</td><td>'.$row->workid.'</td><td><a href="index.php?quit='.$row->workid.'">quittieren</a></td></tr>';
 }
 ?>
 </table>
 <br />
-Scriptlaufzeit des Cronjobs: <?php echo "folgt.." ?><br />
+<?php
+$ergebnis = mysqli_query($db, "SELECT * FROM status WHERE was = 'scriptlaufzeit'");
+while($row = mysqli_fetch_object($ergebnis))
+{
+	$scriptlaufzeit = $row->wert;
+}
+?>
+Scriptlaufzeit des Cronjobs: <?php echo $scriptlaufzeit; ?> Sekunden<br />
 <a href="logbook.php">Logbuch</a><br />
-Login
+<a href="login.php">Login</a><br>
+<a href="https://github.com/ChristianDresel/SiMoNe">Code</a>

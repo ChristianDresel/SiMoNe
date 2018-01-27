@@ -37,8 +37,8 @@ function set_err($msg, $prio, $device, $id)
 		else
 		{
 			$eintrag = "
-				INSERT INTO fail (msg, prio, device, time, active, workid)
-				VALUES ('$msg', '$prio', '$device', '$time', '1', '$id')";
+				INSERT INTO fail (msg, prio, device, timefirst, time, active, workid)
+				VALUES ('$msg', '$prio', '$device', '$time', '$time', '1', '$id')";
 			$eintragen = mysqli_query($GLOBALS["db"], $eintrag);
 		}
 	}
@@ -71,7 +71,10 @@ while($row = mysqli_fetch_object($ergebnis))
 		}
 	}
 }
-$timeges = $timestart - time();
+$timeges = time() - $timestart;
+	echo $timeges;
+$aendern = "UPDATE status Set wert = '$timeges' WHERE was = 'scriptlaufzeit'";
+$update = mysqli_query($GLOBALS["db"], $aendern);
 if ($timeges > 45 AND $timeges < 50)
 {
 	set_err("Cron Simone Scriptlaufzeit $timeges", 1, "Cron", 1);

@@ -6,11 +6,11 @@ include("/var/www/html/simone/config.php");
 <table border="1">
 	<tr>
 		<td>Fehler ID</td>
-		<td>msg</td>
-		<td>prio</td>
-		<td>device</td>
-		<td>timestart</td>
-		<td>timequit</td>
+		<td>Fehlermeldung</td>
+		<td>Priorität</td>
+		<td>Device</td>
+		<td>Erstes auftreten</td>
+		<td>Quittiert am</td>
 		<td>workid</td>
 	</tr>
 <?php
@@ -40,4 +40,5 @@ while($row = mysqli_fetch_object($ergebnis))
 <br />
 Scriptlaufzeit des Cronjobs: <?php echo "folgt.." ?><br />
 <a href="index.php">index</a><br />
-Login
+<a href="login.php">Login</a><br>
+
