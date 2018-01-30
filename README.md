@@ -6,3 +6,4 @@ Auf den zu überwachenden Servern sollen möglichst einfache (Simple) Scripte (s
 # Warum abholen und nicht aktiv senden?
 Es sollen auch Server überwacht werden auf welchen dritte Zugriff haben, somit kann eine gesicherte Übertragung zu meinem SiMoNe System nicht sichergestellt werden. Mit einer fehlerhaften XML kann das System nur wenig gestört werden, werden Daten aktiv gesendet kann viel mehr Unsinn auf dem SiMoNe-Server getrieben werden.
 Weiterhin würde es die Komplexität der Scripte auf den zu überwachenden Systemen erhöhen.
+Ebenso kann durch dieses System relativ einfach ein Serverausfall detektiert werden.
