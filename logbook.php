@@ -10,6 +10,7 @@ include("/var/www/html/simone/config.php");
 		<td>Priorität</td>
 		<td>Device</td>
 		<td>Erstes auftreten</td>
+		<td>letztes auftreten</td>
 		<td>Quittiert am</td>
 		<td>workid</td>
 	</tr>
@@ -32,8 +33,8 @@ while($row = mysqli_fetch_object($ergebnis))
         }
 	$datumlast = date("d.m.Y H:i",$row->timelast);
 	$datumquit = date("d.m.Y H:i",$row->timequit);
-	
-	echo '<tr bgcolor="'.$bgcolor.'"><td>'.$row->ID.'</td><td>'.$row->msg.'</td><td>'.$row->prio.'</td><td>'.$row->device.'</td><td>'.$datumlast.'</td><td>'.$datumquit.'</td><td>'.$row->workid.'</td></tr>';
+	$datumfirst = date("d.m.Y H:i",$row->timefirst);
+	echo '<tr bgcolor="'.$bgcolor.'"><td>'.$row->ID.'</td><td>'.$row->msg.'</td><td>'.$row->prio.'</td><td>'.$row->device.'</td><td>'.$datumfirst.'</td><td>'.$datumlast.'</td><td>'.$datumquit.'</td><td>'.$row->workid.'</td></tr>';
 }
 ?>
 </table>

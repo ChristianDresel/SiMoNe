@@ -2,7 +2,7 @@
 $timestart=time();
 error_reporting(E_ALL);
 ini_set ('display_errors', 'On');
-ini_set('default_socket_timeout', 2);
+ini_set('default_socket_timeout', 4);
 echo "run";
 include("/var/www/html/simone/config.php");
 function check_regex($wert)

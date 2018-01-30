@@ -18,7 +18,7 @@ if (is_numeric($_GET["quit"]))
 		while($row = mysqli_fetch_object($ergebnis))
 		{
 			$timeakt = time();
-			$eintrag = "INSERT INTO logbook (msg, prio, device, timelast, timequit, workid) VALUES ('$row->msg', '$row->prio', '$row->device', '$row->timefirst', '$timeakt', '$row->workid')";
+			$eintrag = "INSERT INTO logbook (msg, prio, device, timefirst, timelast, timequit, workid) VALUES ('$row->msg', '$row->prio', '$row->device', '$row->timefirst', '$row->time', '$timeakt', '$row->workid')";
 			$eintragen = mysqli_query($db, $eintrag);	
 			$loeschen = "DELETE FROM fail WHERE workid = '$quitid'";
 			$loesch = mysqli_query($db, $loeschen);
