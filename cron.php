@@ -14,6 +14,9 @@ function check_regex($wert)
 }
 function set_err($msg, $prio, $device, $id)
 {
+	$msg = str_replace("[", "", $msg);
+	$msg = str_replace("]", "", $msg);
+	$msg = str_replace("/", "", $msg);
 	if (!check_regex($prio) OR !check_regex($msg) OR !check_regex($device))
 	{
 		echo "injection";
