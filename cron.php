@@ -20,10 +20,14 @@ function set_err($msg, $prio, $device, $id)
 	$msg = str_replace("/", "", $msg);
 	if (!check_regex($prio) OR !check_regex($msg) OR !check_regex($device))
 	{
-		echo "injection";
-		//Funktion ruft sich selbst auf, sicherstellen das sie nicht wieder im Injectionzweig landet!!
-		set_err('Injection detect', 3, 'no data', $id);
-		echo "<br><br>$id<br>$prio<br$msg<br>$device";
+		$ergebnis = mysqli_query($GLOBALS["db"], "SELECT id, url FROM work WHERE id = '$id'");
+		while($row = mysqli_fetch_object($ergebnis))
+		{
+			echo "injection";
+			//Funktion ruft sich selbst auf, sicherstellen das sie nicht wieder im Injectionzweig landet!!
+			set_err('Injection detect '.$row->url.'', 3, 'no data', $id);
+			echo "<br><br>$id<br>$prio<br$msg<br>$device";
+		}
 	}
 	else
 	{
@@ -54,7 +58,7 @@ while($row = mysqli_fetch_object($ergebnis))
 	echo $header[0];
 	if ($header[0] == "")
 	{
-		set_err('No Connection', 3, 'no data', $row->id);
+		set_err('No Connection '.$row->url.'', 3, 'no data', $row->id);
 	}
 	else
 	{
@@ -70,7 +74,7 @@ while($row = mysqli_fetch_object($ergebnis))
 		else
 		{
 			$headersend = str_replace("/", "", $header[0]);
-			set_err("$headersend error", 3, 'no data', $row->id); 
+			set_err(''.$headersend.' error '.$row->url.'', 3, 'no data', $row->id); 
 		}
 	}
 }
