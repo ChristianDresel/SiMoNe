@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Europe/Berlin'); 
 echo '<meta http-equiv="refresh" content="30; URL=index.php">';
 //error_reporting(E_ALL);
 //ini_set ('display_errors', 'On');

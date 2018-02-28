@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Europe/Berlin'); 
 $timestart=time();
 error_reporting(E_ALL);
 ini_set ('display_errors', 'On');
